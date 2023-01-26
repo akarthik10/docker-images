@@ -33,7 +33,7 @@ jobs:
         run: echo '${{ steps.changed-files.outputs.all_changed_files }}'
       - id: set-matrix
         run: echo "matrix={\"container\":${{ steps.changed-files.outputs.all_changed_files }}}" >> "$GITHUB_OUTPUT"
-      - id: List reason for run
+      - name: List reason for run
         run: echo "${{ github.event_name }} triggered this run"
 
   matrix-job:
