@@ -40,6 +40,7 @@ jobs:
     name: Run Matrix Job
     runs-on: ubuntu-latest
     needs: [changed-files]
+    if: ${{ needs.changed-files.outputs.matrix != "{\"container\":[]}" }}
     strategy:
       matrix: ${{ fromJSON(needs.changed-files.outputs.matrix) }}
       max-parallel: 4
@@ -48,5 +49,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Test
+        if: (matrix.container != "")
         run: |
           echo ${{ matrix.container }}
