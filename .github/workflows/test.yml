@@ -35,7 +35,7 @@ jobs:
       - id: set-matrix
         run: echo "matrix={\"container\":${{ steps.changed-files.outputs.all_changed_files }}}" >> "$GITHUB_OUTPUT"
       - id: set-skip
-        run: echo "skip=${{ fromJSON(steps.changed-files.outputs.all_changed_files) != '[]'  }}" >> "$GITHUB_OUTPUT"        
+        run: echo "skip=${{ steps.changed-files.outputs.all_changed_files != '[]'  }}" >> "$GITHUB_OUTPUT"        
       - name: List reason for run
         run: echo "${{ github.event_name }} triggered this run"
 
