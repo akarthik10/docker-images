@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
-      skip: ${{ steps.set-skip.outputs.skip }}
+      publish: ${{ steps.set-publish.outputs.publish }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -34,8 +34,8 @@ jobs:
         run: echo '${{ steps.changed-files.outputs.all_changed_files }}'
       - id: set-matrix
         run: echo "matrix={\"container\":${{ steps.changed-files.outputs.all_changed_files }}}" >> "$GITHUB_OUTPUT"
-      - id: set-skip
-        run: echo "skip=${{ steps.changed-files.outputs.all_changed_files == '[]'  }}" >> "$GITHUB_OUTPUT"        
+      - id: set-publish
+        run: echo "publish=${{ steps.changed-files.outputs.all_changed_files != '[]'  }}" >> "$GITHUB_OUTPUT"        
       - name: List reason for run
         run: echo "${{ github.event_name }} triggered this run"
 
@@ -43,7 +43,7 @@ jobs:
     name: Run Matrix Job
     runs-on: ubuntu-latest
     needs: [changed-files]
-    if: ${{ needs.changed-files.outputs.skip == false }}
+    if: needs.changed-files.outputs.publish
     strategy:
       matrix: ${{ fromJSON(needs.changed-files.outputs.matrix) }}
       max-parallel: 4
