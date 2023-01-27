@@ -1,4 +1,4 @@
-name: Matrix Test
+name: Build and publish
 
 on:
   workflow_dispatch:
@@ -11,7 +11,7 @@ on:
 
 jobs:
   changed-files:
-    name: Get changes
+    name: Gather changes
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
@@ -40,7 +40,7 @@ jobs:
         run: echo "${{ github.event_name }} triggered this run"
 
   matrix-job:
-    name: Run Matrix Job
+    name: Run Build Matrix
     runs-on: ubuntu-latest
     needs: [changed-files]
     if: ${{ needs.changed-files.outputs.publish == 'true' }}
