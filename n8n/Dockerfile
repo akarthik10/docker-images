@@ -4,8 +4,6 @@ RUN apt-get update \
 	&& apt-get install -y python3-pip \
     && pip3 install fire \
 	&& apt-get autoremove -y \
-	&& apt-get clean
-
-RUN python3 --version
-
-RUN cd /usr/local/lib/node_modules/n8n && npm install n8n-nodes-python
+	&& apt-get clean \
+    && cd /usr/local/lib/node_modules/n8n \
+    && npm -ddd install n8n-nodes-python
