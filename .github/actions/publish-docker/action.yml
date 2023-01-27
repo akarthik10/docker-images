@@ -15,10 +15,12 @@ runs:
         uses: rlespinasse/github-slug-action@v4
         
       - name: Inject date variables
+        shell: bash
         run: |
           echo "CALVER=$(date +'0.%y%j.%H%M%S')" >> $GITHUB_ENV
 
       - name: Set env
+        shell: bash      
         run: |
           export IMAGE=ghcr.io/${{ env.GITHUB_REPOSITORY_OWNER_PART_SLUG }}/${{ inputs.image }}:${{ env.CALVER }}
           echo "IMAGE=$IMAGE" >> $GITHUB_ENV
