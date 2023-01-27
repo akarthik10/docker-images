@@ -2,7 +2,7 @@ FROM n8nio/n8n:0.199.0-debian
 
 RUN apt-get update \
 	&& apt-get install -y python3-pip \
-    && pip install fire \
+    && pip3 install fire \
 	&& apt-get autoremove -y \
 	&& apt-get clean
 
