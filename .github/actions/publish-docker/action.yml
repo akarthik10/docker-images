@@ -4,6 +4,9 @@ inputs:
   image:
     required: true
     description: "The image to use"
+  token:
+    required: true
+    description: "The Github secret token to login to package repository"
 
 runs:
   using: "composite"
@@ -15,10 +18,12 @@ runs:
         uses: rlespinasse/github-slug-action@v4
         
       - name: Inject date variables
+        shell: bash
         run: |
           echo "CALVER=$(date +'0.%y%j.%H%M%S')" >> $GITHUB_ENV
 
       - name: Set env
+        shell: bash      
         run: |
           export IMAGE=ghcr.io/${{ env.GITHUB_REPOSITORY_OWNER_PART_SLUG }}/${{ inputs.image }}:${{ env.CALVER }}
           echo "IMAGE=$IMAGE" >> $GITHUB_ENV
@@ -34,7 +39,7 @@ runs:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ inputs.token }}
 
       - name: Build and push
         id: docker_build
