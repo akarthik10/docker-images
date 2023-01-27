@@ -57,3 +57,4 @@ jobs:
         uses: ./.github/actions/publish-docker
         with:
           image: ${{ matrix.container }}
+          token: ${{ secrets.GITHUB_TOKEN }}
