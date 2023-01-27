@@ -49,8 +49,8 @@ jobs:
       max-parallel: 4
       fail-fast: false
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Test
-        run: |
-          echo ${{ matrix.container }}
+      - name: Publish to docker
+        id: collect-changes
+        uses: ./.github/actions/publish-docker
+        with:
+          image: ${{ matrix.container }}
