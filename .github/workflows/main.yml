@@ -42,6 +42,8 @@ jobs:
   matrix-job:
     name: Run Build Matrix
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     needs: [changed-files]
     if: ${{ needs.changed-files.outputs.publish == 'true' }}
     strategy:
