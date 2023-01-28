@@ -6,4 +6,6 @@ RUN apt-get update \
 	&& apt-get autoremove -y \
 	&& apt-get clean \
     && cd /usr/local/lib/node_modules/n8n \
+    && npm config set registry="http://registry.npmjs.org" \
+    && npm install npm@latest -g \
     && npm -ddd install n8n-nodes-python
