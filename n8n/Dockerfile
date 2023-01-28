@@ -6,4 +6,4 @@ RUN apt-get update \
 	&& apt-get autoremove -y \
 	&& apt-get clean \
     && cd /usr/local/lib/node_modules/n8n \
-    && yarn add n8n-nodes-python
+    && yarn add n8n-nodes-python --network-timeout 100000
