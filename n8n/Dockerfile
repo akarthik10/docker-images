@@ -1,11 +1,9 @@
 FROM n8nio/n8n:0.199.0-debian
 
 RUN apt-get update \
-	&& apt-get install -y python3-pip \
+	&& apt-get install -y python3-pip yarn \
     && pip3 install fire \
 	&& apt-get autoremove -y \
 	&& apt-get clean \
     && cd /usr/local/lib/node_modules/n8n \
-    && npm config set registry="http://registry.npmjs.org" \
-    && npm install npm@latest -g \
-    && npm -ddd install n8n-nodes-python
+    && yarn add n8n-nodes-python
