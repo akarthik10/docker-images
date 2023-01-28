@@ -1,4 +1,4 @@
-FROM n8nio/n8n:0.199.0-debian
+FROM n8nio/n8n:0.213.0-debian
 
 RUN apt-get update \
 	&& apt-get install -y python3-pip \
