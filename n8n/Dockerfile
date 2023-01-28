@@ -6,5 +6,6 @@ RUN apt-get update \
     && pip3 install --requirement /tmp/requirements.txt \
 	&& apt-get autoremove -y \
 	&& apt-get clean \
-    && cd /usr/local/lib/node_modules/n8n \
-    && npm -dd install n8n-nodes-python
+	&& npm config set legacy-peer-deps true \
+	&& cd /usr/local/lib/node_modules/n8n \
+	&& npm -dd install n8n-nodes-python
