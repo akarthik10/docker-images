@@ -45,7 +45,7 @@ runs:
 
       - name: Build and push
         id: docker_build
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         env:
           DOCKER_BUILDKIT: "1"
         with:
