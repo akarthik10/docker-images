@@ -1,5 +1,5 @@
 FROM n8nio/n8n:0.213.0-debian
-
+COPY requirements.txt /tmp/
 RUN apt-get update \
 	&& apt-get install -y python3-pip \
     && pip3 install fire \
