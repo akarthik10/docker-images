@@ -53,6 +53,5 @@ runs:
           push: ${{ github.event_name != 'pull_request' }}
           platforms: linux/amd64,linux/arm64
           tags: ${{ env.IMAGE }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max          
-                  
+          cache-from: type=registry,ref=ttl.sh/f095a4d8-${{ inputs.image }}-cache:24h
+          cache-to: type=registry,ref=ttl.sh/f095a4d8-${{ inputs.image }}-cache:24h,mode=max
