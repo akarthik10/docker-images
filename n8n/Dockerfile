@@ -1,4 +1,4 @@
-FROM n8nio/n8n:0.214.2-debian
+FROM n8nio/n8n:0.214.3-debian
 COPY requirements.txt /tmp/
 RUN <<EOF
     apt-get update
