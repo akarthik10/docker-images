@@ -4,11 +4,17 @@ ARG PYTHON_VERSION=3.10
 ENV PYENV_ROOT="/root/.pyenv"
 ENV PATH="$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH"
 
-COPY requirements.txt /tmp/
-RUN <<EOF
+RUN <<PYTHON_INSTALL
     apt-get update
     apt-get install git
     git clone --depth=1 https://github.com/pyenv/pyenv.git /root/.pyenv
+    pyenv install $PYTHON_VERSION
+    pyenv global $PYTHON_VERSION
+PYTHON_INSTALL
+
+COPY requirements.txt /tmp/
+
+RUN <<EOF
     apt-get install -y python3-pip
     pip3 install --upgrade pip
     pip3 install fire
@@ -19,6 +25,3 @@ RUN <<EOF
 	cd /usr/local/lib/node_modules/n8n
 	npm -dd install n8n-nodes-python
 EOF
-
-RUN pyenv install $PYTHON_VERSION
-RUN pyenv global $PYTHON_VERSION
