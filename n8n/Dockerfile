@@ -1,7 +1,20 @@
 FROM n8nio/n8n:0.216.0-debian
-COPY requirements.txt /tmp/
-RUN <<EOF
+
+ARG PYTHON_VERSION=3.10
+ENV PYENV_ROOT="/root/.pyenv"
+ENV PATH="$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH"
+
+RUN <<PYTHON_INSTALL
     apt-get update
+    apt-get install git
+    git clone --depth=1 https://github.com/pyenv/pyenv.git /root/.pyenv
+    pyenv install $PYTHON_VERSION
+    pyenv global $PYTHON_VERSION
+PYTHON_INSTALL
+
+COPY requirements.txt /tmp/
+
+RUN <<EOF
     apt-get install -y python3-pip
     pip3 install --upgrade pip
     pip3 install fire
