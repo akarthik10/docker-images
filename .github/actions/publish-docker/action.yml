@@ -17,15 +17,17 @@ runs:
       - name: Inject slug/short variables
         uses: rlespinasse/github-slug-action@v4
         
-      - name: Inject date variables
+      - name: Inject image tag variables
         shell: bash
         run: |
-          echo "CALVER=$(date +'0.%y%j.%H%M%S')" >> $GITHUB_ENV
+          (chmod -f +x ${{ inputs.image }}/.imagetag || true) 2>/dev/null
+          [ -f ${{ inputs.image }}/.imagetag ] && IMAGE_VER=`${{ inputs.image }}/.imagetag` || IMAGE_VER=`date +'0.%y%j.%H%M%S'`
+          echo "IMAGE_VER=$IMAGE_VER" >> $GITHUB_ENV
 
       - name: Set env
         shell: bash      
         run: |
-          export IMAGE=ghcr.io/${{ env.GITHUB_REPOSITORY_OWNER_PART_SLUG }}/${{ inputs.image }}:${{ env.CALVER }}
+          export IMAGE=ghcr.io/${{ env.GITHUB_REPOSITORY_OWNER_PART_SLUG }}/${{ inputs.image }}:${{ env.IMAGE_VER }}
           echo "IMAGE=$IMAGE" >> $GITHUB_ENV
       -
         name: Set up QEMU
