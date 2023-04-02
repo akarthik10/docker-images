@@ -1,2 +1,2 @@
 yfinance==0.2.14
-ytmusicapi==0.25.1
+ytmusicapi==0.25.2
