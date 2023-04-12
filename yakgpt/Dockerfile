@@ -2,6 +2,7 @@ FROM node:19.9.0-alpine3.17 AS base
 
 RUN apk add --no-cache git
 RUN git clone https://github.com/yakGPT/yakGPT /app
+RUN cd /app
 RUN pwd && ls -la
 
 # Install dependencies only when needed
@@ -12,6 +13,7 @@ WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 # COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+RUN yarn up next@13.2.3
 RUN \
   if [ -f yarn.lock ]; then yarn --frozen-lockfile --network-timeout 1000000; \
   elif [ -f package-lock.json ]; then npm ci; \
