@@ -6,7 +6,8 @@ FROM node:19.9.0-bullseye-slim AS base
 # RUN apk add --no-cache git
 # RUN git clone https://github.com/yakGPT/yakGPT /app
 ADD source /app
-RUN cd /app && ls -la
+COPY .next.config.js /app/
+RUN cd /app && ls -la && cat .next.config.js
 
 # Install dependencies only when needed
 FROM base AS deps
