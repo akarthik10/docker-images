@@ -2,7 +2,7 @@ FROM node:19.9.0-bullseye-slim AS base
 #FROM node:19.9.0-alpine3.17 AS base
 
 
-RUN apt-get update && apt-get install git
+RUN apt-get update && apt-get install -y git
 #RUN apk add --no-cache git
 RUN git clone https://github.com/yakGPT/yakGPT /app
 RUN cd /app
