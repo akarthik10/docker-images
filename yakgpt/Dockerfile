@@ -1,5 +1,6 @@
 FROM node:18.3.0-alpine3.15 AS base
 
+RUN apk add --no-cache git
 RUN git clone https://github.com/yakGPT/yakGPT && rm yakGPT/Dockerfile && mv yakGPT/* .. 
 RUN pwd && ls -la
 
