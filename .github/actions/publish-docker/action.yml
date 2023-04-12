@@ -21,7 +21,7 @@ runs:
         shell: bash
         run: |
           (chmod -f +x ${{ inputs.image }}/.prescript || true) 2>/dev/null
-          [ -x ${{ inputs.image }}/.prescript ] && bash ${{ inputs.image }}/.prescript
+          [ -x ${{ inputs.image }}/.prescript ] && bash ${{ inputs.image }}/.prescript || true
         
       - name: Inject image tag variables
         shell: bash
