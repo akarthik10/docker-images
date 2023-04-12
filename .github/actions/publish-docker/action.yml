@@ -17,6 +17,12 @@ runs:
       - name: Inject slug/short variables
         uses: rlespinasse/github-slug-action@v4
         
+      - name: Run pre-script if present
+        shell: bash
+        run: |
+          (chmod -f +x ${{ inputs.image }}/.prescript || true) 2>/dev/null
+          [ -x ${{ inputs.image }}/.prescript ] && bash ${{ inputs.image }}/.prescript || true
+        
       - name: Inject image tag variables
         shell: bash
         run: |
