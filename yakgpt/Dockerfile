@@ -1,5 +1,6 @@
+FROM node:19.9.0-bullseye-slim AS base
 #FROM node:19.9.0-alpine3.17 AS base
-# FROM node:19.9.0-bullseye-slim AS base
+
 
 RUN apt update && apt install git
 #RUN apk add --no-cache git
