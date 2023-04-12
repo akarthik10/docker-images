@@ -1,7 +1,7 @@
 FROM node:19.9.0-alpine3.17 AS base
 
 RUN apk add --no-cache git
-RUN git clone https://github.com/akarthik10/yakGPT /app
+RUN git clone https://github.com/yakGPT/yakGPT /app
 RUN pwd && ls -la
 
 # Install dependencies only when needed
@@ -29,7 +29,7 @@ COPY . .
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
-ENV NEXT_TELEMETRY_DISABLED 1
+# ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN yarn build
 
@@ -42,7 +42,7 @@ WORKDIR /app
 
 ENV NODE_ENV development
 # Uncomment the following line in case you want to disable telemetry during runtime.
-ENV NEXT_TELEMETRY_DISABLED 1
+# ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
