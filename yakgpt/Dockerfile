@@ -1,7 +1,7 @@
 FROM node:19.9.0-alpine3.17 AS base
 
 RUN apk add --no-cache git
-RUN git clone https://github.com/yakGPT/yakGPT /app
+RUN git clone https://github.com/akarthik10/yakGPT /app
 RUN pwd && ls -la
 
 # Install dependencies only when needed
