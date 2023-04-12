@@ -1,4 +1,4 @@
-FROM node:18.3.0-alpine3.15 AS base
+FROM node:19.9.0-alpine3.17 AS base
 
 RUN apk add --no-cache git
 RUN git clone https://github.com/yakGPT/yakGPT /app
