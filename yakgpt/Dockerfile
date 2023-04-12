@@ -1,6 +1,8 @@
-FROM node:19.9.0-alpine3.17 AS base
+#FROM node:19.9.0-alpine3.17 AS base
+# FROM node:19.9.0-bullseye-slim AS base
 
-RUN apk add --no-cache git
+RUN apt update && apt install git
+#RUN apk add --no-cache git
 RUN git clone https://github.com/yakGPT/yakGPT /app
 RUN cd /app
 RUN pwd && ls -la
@@ -8,7 +10,8 @@ RUN pwd && ls -la
 # Install dependencies only when needed
 FROM base AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-RUN apk add --no-cache libc6-compat
+#RUN apk add --no-cache libc6-compat
+RUN apt install libc6-compat 
 WORKDIR /app
 
 # Install dependencies based on the preferred package manager
