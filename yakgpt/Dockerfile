@@ -1,6 +1,7 @@
 FROM node:18.3.0-alpine3.15 AS base
 
-RUN git clone https://github.com/yakGPT/yakGPT && rm yakGPT/Dockerfile && mv yakGPT/* ..
+RUN git clone https://github.com/yakGPT/yakGPT && rm yakGPT/Dockerfile && mv yakGPT/* .. 
+RUN pwd && ls -la
 
 # Install dependencies only when needed
 FROM base AS deps
