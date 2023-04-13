@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y git
 # RUN apk add --no-cache git
 RUN git clone https://github.com/yakGPT/yakGPT /app
 # ADD source /app
-COPY .next.config.js /app/
+COPY next.config.js /app/
 RUN cd /app && ls -la && cat .next.config.js
 
 # Install dependencies only when needed
