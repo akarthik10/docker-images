@@ -1,4 +1,4 @@
-FROM n8nio/n8n:0.224.0-debian
+FROM n8nio/n8n:0.224.1-debian
 
 ARG PYTHON_VERSION=3.10
 ENV PYENV_ROOT="/root/.pyenv"
