@@ -18,6 +18,8 @@ WORKDIR /app
 # Install dependencies based on the preferred package manager
 # COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN yarn config set registry http://registry.npmjs.org/
+RUN yarn upgrade --latest
+RUN yarn add asn1@latest
 RUN yarn --network-timeout 1000000  # --frozen-lockfile
 
 # Rebuild the source code only when needed
