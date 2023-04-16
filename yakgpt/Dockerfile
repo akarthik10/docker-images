@@ -6,7 +6,7 @@ FROM node:19.9.0-alpine3.17 AS base
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-FROM yakgpt:latest as builder
+FROM yakgpt/yakgpt:latest as builder
 
 # Production image, copy all the files and run next
 FROM base AS runner
