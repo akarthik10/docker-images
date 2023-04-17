@@ -25,4 +25,3 @@ RUN <<EOF
 	cd /usr/local/lib/node_modules/n8n
 	npm -dd install n8n-nodes-python
 EOF
-
