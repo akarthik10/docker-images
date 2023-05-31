@@ -8,6 +8,12 @@
       "matchUpdateTypes": ["minor", "patch", "pin"],
       "matchCurrentVersion": "!/^0/",
       "automerge": true
+    },
+    // Allowed packages to be automerged
+    {
+      "matchPackageNames": ["n8nio/n8n"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
     }
   ]
 }
