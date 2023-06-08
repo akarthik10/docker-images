@@ -11,7 +11,7 @@
     },
     // Allowed packages to be automerged
     {
-      "matchPackageNames": ["n8nio/n8n"],
+      "matchPackageNames": ["n8nio/n8n", "yfinance"],
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": true
     }
