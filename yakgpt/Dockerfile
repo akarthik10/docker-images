@@ -1,5 +1,5 @@
 # FROM node:18.15-bullseye-slim AS base
-FROM node:19.9.0-alpine3.17 AS base
+FROM node:20.3.1-alpine3.17 AS base
 
 
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
