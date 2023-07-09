@@ -46,4 +46,4 @@ COPY --from=builder /usr/local/bin/* /usr/local/bin/
 
 ENTRYPOINT ["/bin/sh", "-c"]
 
-CMD ["/bin/sh", "-c", "while [ ! -f /tmp/done ]; do sleep 1; done"]
+CMD ["while [ ! -f /tmp/done ]; do sleep 1; done"]
