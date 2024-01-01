@@ -36,7 +36,7 @@ RUN curl -sL --fail -o restic.bz2 https://github.com/restic/restic/releases/down
 #
 # Final image
 #
-FROM alpine:3.18
+FROM alpine:3.19
 
 RUN apk add --update --no-cache ca-certificates fuse nfs-utils openssh tzdata bash curl docker-cli postgresql-client mariadb-client
 
