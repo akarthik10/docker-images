@@ -18,7 +18,7 @@ jobs:
       publish: ${{ steps.set-publish.outputs.publish }}
     steps:
       - name: Checkout
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
         with:
           fetch-depth: 0
       - name: Get changed files
@@ -56,7 +56,7 @@ jobs:
       cancel-in-progress: true
     steps:
       - name: Checkout
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
         
       - name: Echo concurrency group
         run: echo "${{matrix.container}}-${{ github.head_ref || github.ref_name }}"
