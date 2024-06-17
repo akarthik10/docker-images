@@ -9,7 +9,7 @@ function run_commands {
 run_commands "${RCLONE_COPYCONFIG_COMMAND:-}"
 run_commands "${RCLONE_ABOUT_COMMAND:-}"
 
-run_commands "${RESTIC_PREBACKUP_COMMAND:-}"
+run_commands "${PRE_BACKUP_COMMAND:-}"
 run_commands "${RESTIC_BACKUP_COMMAND:-}"
 
 run_commands "${RESTIC_FORGET_COMMAND:-}"
