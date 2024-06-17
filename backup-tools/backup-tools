@@ -14,3 +14,5 @@ run_commands "${RESTIC_BACKUP_COMMAND:-}"
 
 run_commands "${RESTIC_FORGET_COMMAND:-}"
 run_commands "${RESTIC_CHECK_COMMAND:-}"
+
+sleep "${SLEEP_DURATION_POST_BACKUP:-}"

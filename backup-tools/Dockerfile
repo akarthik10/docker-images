@@ -27,6 +27,8 @@ ENV RESTIC_BACKUP_COMMAND restic --verbose=1 --host home-cluster backup /backup-
 ENV RESTIC_FORGET_COMMAND restic forget --keep-last 10 --keep-hourly 24 --keep-daily 30 --keep-weekly 8 --keep-monthly 6 --keep-yearly 2 --prune
 ENV RESTIC_CHECK_COMMAND restic check
 
+ENV SLEEP_DURATION_POST_BACKUP 60
+
 ENTRYPOINT ["/root/backup-tools"]
 
 # CMD ["while [ ! -f /tmp/done ]; do sleep 1; done"]
