@@ -19,8 +19,8 @@ COPY --from=rclone /usr/local/bin/rclone /usr/local/bin/
 
 COPY backup-tools /root
 
-ENV RCLONE_COPYCONFIG_COMMAND mkdir -p /root/.config/rclone \
-cp /tmp/rclone-config/rclone.conf /root/.config/rclone/rclone.conf
+ENV RCLONE_COPYCONFIG_COMMAND "mkdir -p /root/.config/rclone; \
+cp /tmp/rclone-config/rclone.conf /root/.config/rclone/rclone.conf; "
 ENV RCLONE_ABOUT_COMMAND rclone about 'gdrive-hc-backup:'
 ENV RESTIC_BACKUP_COMMAND restic --verbose=1 --host home-cluster backup /backup-data
 
