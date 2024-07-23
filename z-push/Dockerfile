@@ -10,7 +10,14 @@ RUN apt update && \
     wget -O z-push.tar.gz https://github.com/Z-Hub/Z-Push/archive/refs/tags/${ZPUSH_VERSION}.tar.gz && \
     tar xzvf z-push.tar.gz && \
     cp -r Z-Push-${ZPUSH_VERSION}/src/* /usr/local/lib/z-push/ && \
-    rm /etc/nginx/sites-enabled/default
+    rm /etc/nginx/sites-enabled/default && \
+    rm -rf z-push.tar.gz Z-Push-${ZPUSH_VERSION} && \
+    ln -sf /dev/stdout /var/log/nginx/access.log && \
+    ln -sf /dev/stderr /var/log/nginx/error.log && \
+    ln -sf /dev/stdout /var/log/z-push/z-push.log && \
+    ln -sf /dev/stderr /var/log/z-push/z-push-error.log && \
+    sed -i "/TIMEZONE/c\    define('TIMEZONE', 'America/New_York');" /usr/local/lib/z-push/config.php && \
+    sed -i "/BACKEND_PROVIDER/c\    define('BACKEND_PROVIDER', 'BackendIMAP');" /usr/local/lib/z-push/config.php
 
 COPY ./supervisord.conf /etc/supervisord.conf
 COPY ./nginx.conf /etc/nginx/sites-enabled/default.conf
