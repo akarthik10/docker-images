@@ -17,7 +17,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt update && \
     curl -sSL https://packages.sury.org/php/README.txt | bash -x && \
     apt update && \
-    apt -y install supervisor nginx wget php8.2 php8.2-cli php8.2-soap php8.2-mbstring php8.2-imap php8.2-fpm && \
+    apt -y install supervisor nginx wget php8.2 php8.2-cli php8.2-soap php8.2-mbstring php8.2-imap php8.2-fpm php8.2-intl && \
     mkdir -p /usr/local/lib/z-push/ /var/log/z-push /state && \
     chmod 755 /usr/local/lib/z-push/ /var/log/z-push && \
     chmod 777 /state && \
