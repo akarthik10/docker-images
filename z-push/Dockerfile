@@ -30,8 +30,9 @@ RUN apt update && \
     ln -sf /dev/stderr /var/log/nginx/error.log && \
     ln -sf /dev/stdout /var/log/z-push/z-push.log && \
     ln -sf /dev/stderr /var/log/z-push/z-push-error.log && \
-    sed -i "/TIMEZONE/c\    define('TIMEZONE', 'America/New_York');" /usr/local/lib/z-push/config.php && \
-    sed -i "/BACKEND_PROVIDER/c\    define('BACKEND_PROVIDER', 'BackendIMAP');" /usr/local/lib/z-push/config.php
+    sed -i "/'TIMEZONE'/c\    define('TIMEZONE', 'America/New_York');" /usr/local/lib/z-push/config.php && \
+    sed -i "/'BACKEND_PROVIDER'/c\    define('BACKEND_PROVIDER', 'BackendIMAP');" /usr/local/lib/z-push/config.php && \
+    sed -i "/'IMAP_OPTIONS'/c\    define('IMAP_OPTIONS', '/ssl');" /usr/local/lib/z-push/backend/imap/config.php
 
 COPY ./supervisord.conf /etc/supervisord.conf
 COPY ./nginx.conf /etc/nginx/sites-enabled/default.conf
