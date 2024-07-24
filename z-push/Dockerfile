@@ -18,7 +18,7 @@ RUN apt update && \
     curl -sSL https://packages.sury.org/php/README.txt | bash -x && \
     apt update && \
     apt -y install supervisor nginx wget php8.2 php8.2-cli php8.2-soap php8.2-mbstring php8.2-imap php8.2-fpm && \
-    mkdir /usr/local/lib/z-push/ /var/log/z-push && \
+    mkdir /usr/local/lib/z-push/ /var/log/z-push /var/lib/z-push && \
     chmod 755 /usr/local/lib/z-push/ /var/log/z-push && \
     wget -O z-push.tar.gz https://github.com/Z-Hub/Z-Push/archive/refs/tags/${ZPUSH_VERSION}.tar.gz && \
     tar xzvf z-push.tar.gz && \
