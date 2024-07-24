@@ -1,7 +1,7 @@
 #!/bin/sh
 
 sed -i "/TIMEZONE/c\    define('TIMEZONE', '"$TIMEZONE"');" /usr/local/lib/z-push/config.php
-sed -i "/'STATE_DIR'/c\    define('STATE_DIR', '/state');" /usr/local/lib/z-push/config.php
+sed -i "/'STATE_DIR'/c\    define('STATE_DIR', '/state/');" /usr/local/lib/z-push/config.php
 
 sed -i "/IMAP_SERVER/c\ define('IMAP_SERVER', '"$IMAP_SERVER"');" /usr/local/lib/z-push/backend/imap/config.php
 sed -i "/IMAP_PORT/c\ define('IMAP_PORT', '"$IMAP_PORT"');" /usr/local/lib/z-push/backend/imap/config.php 
