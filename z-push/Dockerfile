@@ -28,9 +28,8 @@ RUN apt update && \
     rm -rf z-push.tar.gz Z-Push-${ZPUSH_VERSION} && \
     ln -sf /proc/1/fd/1 /var/log/nginx/access.log && \
     ln -sf /proc/1/fd/2 /var/log/nginx/error.log && \
-    ln -sf /proc/1/fd/1 /var/log/z-push/z-push.log && \
-    ln -sf /proc/1/fd/2 /var/log/z-push/z-push-error.log && \
-    chown -R www-data:www-data /var/log/z-push && \
+    ln -sf /proc/19/fd/1 /var/log/z-push/z-push.log && \
+    ln -sf /proc/19/fd/2 /var/log/z-push/z-push-error.log && \
     sed -i "/'TIMEZONE'/c\    define('TIMEZONE', 'America/New_York');" /usr/local/lib/z-push/config.php && \
     sed -i "/'BACKEND_PROVIDER'/c\    define('BACKEND_PROVIDER', 'BackendIMAP');" /usr/local/lib/z-push/config.php && \
     sed -i "/'IMAP_OPTIONS'/c\    define('IMAP_OPTIONS', '/ssl');" /usr/local/lib/z-push/backend/imap/config.php
