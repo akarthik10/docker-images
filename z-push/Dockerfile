@@ -1,5 +1,18 @@
 FROM debian:12.6-slim
 ENV ZPUSH_VERSION=2.7.3
+
+ARG IMAP_SERVER
+ARG IMAP_PORT
+ARG TIMEZONE
+ARG SMTP_SERVER
+ARG SMTP_PORT
+
+ENV IMAP_SERVER=${IMAP_SERVER}
+ENV IMAP_PORT=${IMAP_PORT}
+ENV TIMEZONE=${TIMEZONE}
+ENV SMTP_SERVER=${SMTP_SERVER}
+ENV SMTP_PORT=${SMTP_PORT}
+
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt update && \
     curl -sSL https://packages.sury.org/php/README.txt | bash -x && \
@@ -21,6 +34,7 @@ RUN apt update && \
 
 COPY ./supervisord.conf /etc/supervisord.conf
 COPY ./nginx.conf /etc/nginx/sites-enabled/default.conf
-CMD ["/usr/bin/supervisord", "-n"]
+COPY ./run.sh /run.sh
+CMD ["/run.sh"]
 
 EXPOSE 80
