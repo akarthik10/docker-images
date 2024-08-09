@@ -1,4 +1,4 @@
-FROM debian:12-slim
+FROM debian:12.6-slim
 
 ENV container=docker \
     LC_ALL=C
@@ -9,7 +9,6 @@ ADD dovecot.list /etc/apt/sources.list.d
 
 RUN apt-get -y update && apt-get -y install \
   tini \
-  dovecot-core \
   dovecot-imapd && \
   rm -rf /var/lib/apt/lists && \
   groupadd -g 1000 vmail && \
