@@ -19,7 +19,7 @@ RUN apt update && \
     # For some reason SOGo wants this file to be present
     mkdir -p /usr/share/doc/sogo/ && touch /usr/share/doc/sogo/foo.sh && \
     # Install the actual services needed
-    apt install -y --no-install-recommends apache2 sogo supervisor gosu sope4.9-gdl1-postgresql sogo-activesync libwbxml2-dev && \
+    apt install -y --no-install-recommends apache2 sogo supervisor gosu sope4.9-gdl1-postgresql sogo-activesync && \
     # Prepare non-privileged file permissions for SOGo
     chown sogo /etc/sogo/sogo.conf && \
     mkdir -p /var/run/sogo && chown sogo /var/run/sogo && \
