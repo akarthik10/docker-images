@@ -1,38 +1,46 @@
-FROM debian:12-slim
+FROM debian:12-slim AS builder
 
 RUN apt update && \
-    apt upgrade -y && \
-    apt install -y gnupg2 apt-utils ca-certificates apt-transport-https wget
-
-RUN wget -O- "https://keys.openpgp.org/vks/v1/by-fingerprint/74FFC6D72B925A34B5D356BDF8A27B36A6E2EAE9" | gpg --dearmor | apt-key add - &&\
-	echo "deb [ arch=amd64 signed-by=/etc/apt/keyrings/sogo.asc ] https://packages.sogo.nu/nightly/5/debian/ bookworm bookworm" > /etc/apt/sources.list.d/sogo.list && \
-	wget -O- "https://keys.openpgp.org/vks/v1/by-fingerprint/74FFC6D72B925A34B5D356BDF8A27B36A6E2EAE9" | tee /etc/apt/keyrings/sogo.asc && \
-	apt update
-
-RUN apt update && \
-    # Switch to non-interactive install
     export DEBIAN_FRONTEND=noninteractive && \
-    # Do the time zone settings beforehand so we don't get promted for it during install (pick your timezone)
-    echo "tzdata tzdata/Areas select America" | debconf-set-selections && \
-    echo "tzdata tzdata/Zones/America select New_York" | debconf-set-selections && \
-    echo "tzdata tzdata/Zones/Etc select UTC" | debconf-set-selections && \
-    # For some reason SOGo wants this file to be present
-    mkdir -p /usr/share/doc/sogo/ && touch /usr/share/doc/sogo/foo.sh && \
-    # Install the actual services needed
-    apt install -y --no-install-recommends apache2 sogo supervisor gosu sope4.9-gdl1-postgresql sogo-activesync && \
-    # Prepare non-privileged file permissions for SOGo
-    chown sogo /etc/sogo/sogo.conf && \
-    mkdir -p /var/run/sogo && chown sogo /var/run/sogo && \
-    # Apache also runs on a non-privileged user
-    mkdir -p /var/run/apache2 && chown www-data /var/run/apache2 && \
-    # Activate the necessary Apache mods and disable the default site
-    a2enmod proxy headers proxy_http rewrite && \
-    a2dissite 000-default && \
-    # Verify that gosu works
-    gosu nobody true
+    apt upgrade -y && \
+    apt install -y gnupg2 apt-utils ca-certificates apt-transport-https wget nginx
 
-# This file is explained below
-COPY supervisord.conf /etc/supervisord/supervisord.conf
+RUN wget https://packages.sogo.nu/sources/SOPE-5.11.0.tar.gz 
+RUN wget https://packages.sogo.nu/sources/SOGo-5.11.0.tar.gz
 
-# Supervisord will start Apache and SOGo
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord/supervisord.conf"]
+RUN apt install -y build-essential gnustep-make gnustep-base-runtime libgnustep-base-dev pkg-config libpq-dev libcurl4-openssl-dev  \
+    libz-dev libssl-dev libxml2-dev libldap2-dev 
+
+RUN tar -xvf /SOPE-5.11.0.tar.gz && \
+    cd /SOPE && \
+    ./configure --with-gnustep --enable-debug --disable-strip && \
+    make && \
+    make install && \
+    rm -rf /SOPE-5.11.0.tar.gz /SOPE && \
+    ldconfig
+
+RUN apt install -y libsodium-dev libmemcached-dev libwbxml2-dev libzip-dev libytnef-dev
+
+RUN tar -xvf /SOGo-5.11.0.tar.gz && \
+    cd /SOGo-5.11.0 && \
+    ./configure --enable-debug --disable-strip && \
+    make && \
+    make install && \
+    rm -rf /SOGo-5.11.0.tar.gz /SOGo-5.11.0 && \
+    echo "/usr/local/lib/sogo" > /etc/ld.so.conf.d/sogo.conf  && \
+    ldconfig 
+
+RUN ldd /usr/local/sbin/sogod | cut -d" " -f3 | xargs tar --dereference -cvf /tmp/libs.tar
+RUN tar -rvf /tmp/libs.tar /usr/local/lib/sogo /usr/share/GNUstep /usr/local/lib/GNUstep/ /etc/GNUstep/GNUstep.conf /usr/local/sbin/sogod
+
+FROM nginx:1.27.1-bookworm AS runner
+COPY --from=builder /tmp/libs.tar /tmp/libs.tar
+RUN ls -lah /tmp/libs.tar  && tar -xvf /tmp/libs.tar && rm /tmp/libs.tar
+RUN echo "/usr/local/lib/sogo" > /etc/ld.so.conf.d/sogo.conf && \
+ldconfig && \
+groupadd --system sogo && \
+useradd --system --gid sogo sogo && \
+install -o sogo -g sogo -m 755 -d /var/run/sogo /var/spool/sogo /var/log/sogo
+# RUN apt update && apt install -y strace libcurl4
+USER sogo
+RUN /usr/local/sbin/sogod -WOWorkersCount 1 -WOPort 127.0.0.1:13500 -WOPidFile /var/run/sogo/sogo.pid -WOLogFile - -WONoDetach YES
