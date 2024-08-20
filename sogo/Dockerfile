@@ -3,7 +3,7 @@ FROM debian:12-slim AS builder
 RUN apt update && \
     export DEBIAN_FRONTEND=noninteractive && \
     apt upgrade -y && \
-    apt install -y gnupg2 apt-utils ca-certificates apt-transport-https wget nginx
+    apt install -y gnupg2 apt-utils ca-certificates apt-transport-https wget nginx gosu
 
 RUN wget https://packages.sogo.nu/sources/SOPE-5.11.0.tar.gz 
 RUN wget https://packages.sogo.nu/sources/SOGo-5.11.0.tar.gz
@@ -42,5 +42,6 @@ groupadd --system sogo && \
 useradd --system --gid sogo sogo && \
 install -o sogo -g sogo -m 755 -d /var/run/sogo /var/spool/sogo /var/log/sogo
 # RUN apt update && apt install -y strace libcurl4
-USER sogo
-RUN /usr/local/sbin/sogod -WOWorkersCount 1 -WOPort 127.0.0.1:13500 -WOPidFile /var/run/sogo/sogo.pid -WOLogFile - -WONoDetach YES
+# USER sogo
+# RUN /usr/local/sbin/sogod -WOWorkersCount 1 -WOPort 127.0.0.1:13500 -WOPidFile /var/run/sogo/sogo.pid -WOLogFile - -WONoDetach YES
+COPY 50-run-sogo.sh /docker-entrypoint.d
