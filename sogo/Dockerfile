@@ -31,7 +31,7 @@ RUN tar -xvf /SOGo-5.11.0.tar.gz && \
     ldconfig 
 
 RUN ldd /usr/local/sbin/sogod | cut -d" " -f3 | xargs tar --dereference -cvf /tmp/libs.tar
-RUN tar -rvf /tmp/libs.tar /usr/local/lib/sogo /usr/share/GNUstep /usr/local/lib/GNUstep/ /etc/GNUstep/GNUstep.conf /usr/local/sbin/sogod
+RUN tar -rvf /tmp/libs.tar /usr/local/lib/sogo /usr/share/GNUstep /usr/local/lib/GNUstep/ /etc/GNUstep/GNUstep.conf /usr/sbin/gosu /usr/local/sbin/sogod 
 
 FROM nginx:1.27.1-bookworm AS runner
 COPY --from=builder /tmp/libs.tar /tmp/libs.tar
