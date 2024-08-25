@@ -34,7 +34,7 @@ RUN tar -xvf /SOGo-5.11.0.tar.gz && \
     ldconfig 
 
 RUN ldd /usr/local/sbin/sogod | cut -d" " -f3 | xargs tar --dereference -cvf /tmp/libs.tar
-RUN tar -rvf /tmp/libs.tar /usr/local/lib/sogo /usr/share/GNUstep /usr/local/lib/GNUstep/ /etc/GNUstep/GNUstep.conf /usr/sbin/gosu /usr/local/sbin/sogod 
+RUN tar -rvf /tmp/libs.tar /usr/local/lib/sogo /usr/share/GNUstep /usr/local/lib/GNUstep/ /etc/GNUstep/GNUstep.conf /usr/sbin/gosu /usr/local/sbin/sogod
 
 FROM nginx:1.27.1-bookworm AS runner
 COPY --from=builder /tmp/libs.tar /tmp/libs.tar
@@ -44,7 +44,7 @@ ldconfig && \
 groupadd --system sogo && \
 useradd --system --gid sogo sogo && \
 install -o sogo -g sogo -m 755 -d /var/run/sogo /var/spool/sogo /var/log/sogo
-RUN apt update && apt install -y libpq5 memcached
+RUN apt update && apt install -y libpq5 memcached libwbxml2-utils
 # RUN apt update && apt install -y strace libcurl4
 # USER sogo
 # RUN /usr/local/sbin/sogod -WOWorkersCount 1 -WOPort 127.0.0.1:13500 -WOPidFile /var/run/sogo/sogo.pid -WOLogFile - -WONoDetach YES
