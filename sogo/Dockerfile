@@ -46,3 +46,4 @@ RUN apt update && apt install -y libpq5
 # USER sogo
 # RUN /usr/local/sbin/sogod -WOWorkersCount 1 -WOPort 127.0.0.1:13500 -WOPidFile /var/run/sogo/sogo.pid -WOLogFile - -WONoDetach YES
 COPY 50-run-sogo.sh /docker-entrypoint.d
+COPY 60-start-memcached.sh /docker-entrypoint.d
