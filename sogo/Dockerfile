@@ -26,6 +26,9 @@ RUN tar -xvf /SOGo-5.11.0.tar.gz && \
     ./configure --enable-debug --disable-strip && \
     make && \
     make install && \
+    cd ActiveSync && \
+    make && \
+    make install && \
     rm -rf /SOGo-5.11.0.tar.gz /SOGo-5.11.0 && \
     echo "/usr/local/lib/sogo" > /etc/ld.so.conf.d/sogo.conf  && \
     ldconfig 
