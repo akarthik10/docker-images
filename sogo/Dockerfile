@@ -41,6 +41,7 @@ ldconfig && \
 groupadd --system sogo && \
 useradd --system --gid sogo sogo && \
 install -o sogo -g sogo -m 755 -d /var/run/sogo /var/spool/sogo /var/log/sogo
+RUN apt update && apt install -y libpq5
 # RUN apt update && apt install -y strace libcurl4
 # USER sogo
 # RUN /usr/local/sbin/sogod -WOWorkersCount 1 -WOPort 127.0.0.1:13500 -WOPidFile /var/run/sogo/sogo.pid -WOLogFile - -WONoDetach YES
