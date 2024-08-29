@@ -50,6 +50,9 @@ RUN ldd /usr/local/bin/memcached | cut -d" " -f3 | xargs tar --dereference -rvf 
 RUN find / -name libpq.so.5 | xargs tar --dereference -rvf /tmp/libs.tar
 RUN find / -name libwbxml2.so.1 | xargs tar --dereference -rvf /tmp/libs.tar
 
+RUN apt install -y rdfind && \
+    which rdfind | xargs tar -rvf /tmp/libs.tar
+
 FROM nginx:1.27.1-bookworm AS runner
 # COPY --from=builder /tmp/libs.tar /tmp/libs.tar
 RUN --mount=type=bind,from=builder,source=/tmp/libs.tar,target=/tmp/libs.tar ls -lah /tmp/libs.tar  && tar -xvf /tmp/libs.tar && \ 
@@ -58,7 +61,8 @@ echo "/usr/local/lib/sogo" > /etc/ld.so.conf.d/sogo.conf && \
 ldconfig && \
 groupadd --system sogo && \
 useradd --system --gid sogo sogo && \
-install -o sogo -g sogo -m 755 -d /var/run/sogo /var/spool/sogo /var/log/sogo
+install -o sogo -g sogo -m 755 -d /var/run/sogo /var/spool/sogo /var/log/sogo && \
+rdfind -makesymlinks true -makeresultsfile false /usr/lib/
 # RUN apt update && apt install -y strace libcurl4
 # USER sogo
 # RUN /usr/local/sbin/sogod -WOWorkersCount 1 -WOPort 127.0.0.1:13500 -WOPidFile /var/run/sogo/sogo.pid -WOLogFile - -WONoDetach YES
