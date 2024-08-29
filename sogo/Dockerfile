@@ -50,6 +50,14 @@ RUN ldd /usr/local/bin/memcached | cut -d" " -f3 | xargs tar --dereference -rvf 
 RUN find / -name libpq.so.5 | xargs tar --dereference -rvf /tmp/libs.tar
 RUN find / -name libwbxml2.so.1 | xargs tar --dereference -rvf /tmp/libs.tar
 
+RUN apt install -y rdfind && \
+    mkdir -p /tmp/rootfs && \
+    ls -lah /tmp/libs.tar && \
+    tar -xvf /tmp/libs.tar -C /tmp/rootfs && \
+    rdfind -makesymlinks true -makeresultsfile false /tmp/rootfs/usr/local/lib/ && \
+    tar -cvf /tmp/libs.tar -C /tmp/rootfs . && \
+    ls -lah /tmp/libs.tar
+
 FROM nginx:1.27.1-bookworm AS runner
 # COPY --from=builder /tmp/libs.tar /tmp/libs.tar
 RUN --mount=type=bind,from=builder,source=/tmp/libs.tar,target=/tmp/libs.tar ls -lah /tmp/libs.tar  && tar -xvf /tmp/libs.tar && \ 
