@@ -47,8 +47,8 @@ RUN wget https://github.com/memcached/memcached/archive/refs/tags/1.6.29.tar.gz 
 RUN ldd /usr/local/sbin/sogod | cut -d" " -f3 | xargs tar --dereference -cvf /tmp/libs.tar
 RUN tar -rvf /tmp/libs.tar /usr/local/lib/sogo /usr/share/GNUstep /usr/local/lib/GNUstep/ /etc/GNUstep/GNUstep.conf /usr/sbin/gosu /usr/local/sbin/sogod
 RUN ldd /usr/local/bin/memcached | cut -d" " -f3 | xargs tar --dereference -rvf /tmp/libs.tar
-RUN find / -name libpq.so.5
-RUN find / -name libwbxml2.so.1
+RUN find / -name libpq.so.5 | xargs tar --dereference -rvf /tmp/libs.tar
+RUN find / -name libwbxml2.so.1 | xargs tar --dereference -rvf /tmp/libs.tar
 
 FROM nginx:1.27.1-bookworm AS runner
 # COPY --from=builder /tmp/libs.tar /tmp/libs.tar
@@ -58,10 +58,7 @@ echo "/usr/local/lib/sogo" > /etc/ld.so.conf.d/sogo.conf && \
 ldconfig && \
 groupadd --system sogo && \
 useradd --system --gid sogo sogo && \
-install -o sogo -g sogo -m 755 -d /var/run/sogo /var/spool/sogo /var/log/sogo && \
-apt update && apt install -y --no-install-recommends libpq5 libwbxml2-utils && \
-    apt clean && \
-    rm -rf /var/lib/apt/lists/*
+install -o sogo -g sogo -m 755 -d /var/run/sogo /var/spool/sogo /var/log/sogo
 # RUN apt update && apt install -y strace libcurl4
 # USER sogo
 # RUN /usr/local/sbin/sogod -WOWorkersCount 1 -WOPort 127.0.0.1:13500 -WOPidFile /var/run/sogo/sogo.pid -WOLogFile - -WONoDetach YES
