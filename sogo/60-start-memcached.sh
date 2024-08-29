@@ -1,3 +1,3 @@
 #!/bin/sh
 
-/usr/bin/memcached -u root &
+/usr/local/bin/memcached -u root &
