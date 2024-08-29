@@ -44,9 +44,9 @@ RUN wget https://github.com/memcached/memcached/archive/refs/tags/1.6.29.tar.gz 
     cp memcached /usr/local/bin/
 
 
-RUN ldd /usr/local/sbin/sogod | cut -d" " -f3 | xargs tar --dereference -cvf /tmp/libs.tar
+RUN ldd /usr/local/sbin/sogod | cut -d" " -f3 | xargs tar -cvf /tmp/libs.tar
 RUN tar -rvf /tmp/libs.tar /usr/local/lib/sogo /usr/share/GNUstep /usr/local/lib/GNUstep/ /etc/GNUstep/GNUstep.conf /usr/sbin/gosu /usr/local/sbin/sogod /usr/local/bin/memcached
-RUN ldd /usr/local/bin/memcached | cut -d" " -f3 | xargs tar --dereference -rvf /tmp/libs.tar
+RUN ldd /usr/local/bin/memcached | cut -d" " -f3 | xargs tar -rvf /tmp/libs.tar
 RUN find / -name libpq.so.5 | xargs tar --dereference -rvf /tmp/libs.tar
 RUN find / -name libwbxml2.so.1 | xargs tar --dereference -rvf /tmp/libs.tar
 
