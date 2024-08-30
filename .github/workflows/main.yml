@@ -82,7 +82,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh api "/users/${{ github.repository_owner }}/packages?package_type=container" | tee jq -r '.[] | select(.repository.full_name == "${{ github.repository }}").name' | sort > packages.txt
+          # gh api "/users/${{ github.repository_owner }}/packages?package_type=container" | jq -r '.[] | select(.repository.full_name == "${{ github.repository }}").name' | sort > packages.txt
+          gh api "/users/${{ github.repository_owner }}/packages?package_type=container" > temp.txt
+          echo temp.txt
 
       - name: Generate table
         id: generate-table
