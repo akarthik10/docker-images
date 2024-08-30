@@ -101,7 +101,7 @@ jobs:
 
       - name: Insert table into README
         run: |
-          sed -i '' '/<!-- AUTO-GENERATED-TABLE-START -->/,/<!-- AUTO-GENERATED-TABLE-END -->/ {
+          sed -i '/<!-- AUTO-GENERATED-TABLE-START -->/,/<!-- AUTO-GENERATED-TABLE-END -->/ {
               /<!-- AUTO-GENERATED-TABLE-START -->/! {
               /<!-- AUTO-GENERATED-TABLE-END -->/!d
               }
