@@ -3,7 +3,6 @@
 A monorepo to hold docker images. 
 
 <!-- AUTO-GENERATED-TABLE-START -->
-
 | Package | Latest Version | Last Updated |
 |---------|----------------|--------------|
 | backup-tools | 0.24215.225251 | 2024-08-02T22:53:02Z |
