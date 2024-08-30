@@ -87,6 +87,9 @@ jobs:
 
       - name: Generate table
         id: generate-table
+        env:
+          GH_TOKEN: "${{ secrets.DOCKER_IMAGES_GH_TOKEN }}"
+          GH_DEBUG: true
         run: |
           echo "| Package | Latest Version | Last Updated |" > table.md
           echo "|---------|----------------|--------------|" >> table.md
