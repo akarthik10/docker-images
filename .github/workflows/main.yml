@@ -91,12 +91,13 @@ jobs:
           GH_TOKEN: "${{ secrets.DOCKER_IMAGES_GH_TOKEN }}"
           GH_DEBUG: true
         run: |
-          echo "| Package | Latest Version | Last Updated |" > table.md
-          echo "|---------|----------------|--------------|" >> table.md
+          echo "| Package | Latest Version | Size | Last Updated |" > table.md
+          echo "|---------|----------------|------|--------------|" >> table.md
           while IFS= read -r package; do
             latest_version=$(gh api "/users/${{ github.repository_owner }}/packages/container/$package/versions" | jq -r 'map(select(.metadata.container.tags | length > 0)) | .[0] | .metadata.container.tags[0]')
             last_updated=$(gh api "/users/${{ github.repository_owner }}/packages/container/$package/versions" | jq -r 'map(select(.metadata.container.tags | length > 0)) | .[0] .updated_at ')
-            echo "| $package | $latest_version | $last_updated |" >> table.md
+            size=$(docker manifest inspect -v "ghcr.io/${{ github.repository_owner }}/$package:$latest_version" | jq -c 'if type == "array" then .[] else . end' |  jq -r '[ ( .Descriptor.platform | [ .os, .architecture, .variant, ."os.version" ] | del(..|nulls) | join("/") ), ( [ ( .OCIManifest // .SchemaV2Manifest ).layers[].size ] | add ) ] | join(" ")' | numfmt --to iec --format '%.2f' --field 2 | sort | column -t)
+            echo "| $package | $latest_version | $size | $last_updated | " >> table.md
           done < packages.txt
 
       - name: Insert table into README
