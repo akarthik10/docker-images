@@ -14,24 +14,6 @@
       "matchPackageNames": ["n8nio/n8n", "yfinance"],
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": true
-    },
-    {
-      "fileMatch": ["^Dockerfile$"],
-      "matchStrings": ["SOGO_VERSION=(?<currentValue>.*)"],
-      "datasourceTemplate": "github-releases",
-      "matchPackagePatterns": ["^Alinto/sogo$"]
-    },
-    {
-      "fileMatch": ["^Dockerfile$"],
-      "matchStrings": ["SOPE_VERSION=(?<currentValue>.*)"],
-      "datasourceTemplate": "github-releases",
-      "matchPackagePatterns": ["^Alinto/sope$"]
-    },
-    {
-      "fileMatch": ["^Dockerfile$"],
-      "matchStrings": ["MEMCACHED_VERSION=(?<currentValue>.*)"],
-      "datasourceTemplate": "github-releases",
-      "matchPackagePatterns": ["^memcached/memcached$"]
     }
   ]
 }
