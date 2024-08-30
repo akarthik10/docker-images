@@ -95,8 +95,8 @@ jobs:
 
       - name: Insert table into README
         run: |
-          sed -i '/<!-- AUTO-GENERATED-CONTENT-START -->/,/<!-- AUTO-GENERATED-CONTENT-END -->/c\<!-- AUTO-GENERATED-CONTENT-START -->\n'$(cat table.md)'\n<!-- AUTO-GENERATED-CONTENT-END -->' README.md
-
+          awk 'BEGIN {p=1} /<!-- AUTO-GENERATED-CONTENT-START -->/ {print;system("cat table.md");p=0} /<!-- AUTO-GENERATED-CONTENT-END -->/ {p=1} p' README.md > README.tmp && mv README.tmp README.md
+    
       - name: Commit and push changes
         run: |
           git config --global user.name "GitHub Actions"
