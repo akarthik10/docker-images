@@ -25,14 +25,14 @@ RUN tar -xvf SOPE-${SOPE_VERSION}.tar.gz && \
 RUN apt install -y libsodium-dev libmemcached-dev libwbxml2-dev libzip-dev libytnef-dev
 
 RUN tar -xvf SOGO-${SOGO_VERSION}.tar.gz && \
-    cd sogo-SOGO-${SOGO_VERSION} && \
+    cd sogo-SOGo-${SOGO_VERSION} && \
     ./configure --enable-debug --disable-strip && \
     make && \
     make install && \
     cd ActiveSync && \
     make && \
     make install && \
-    rm -rf SOGO-${SOGO_VERSION}.tar.gz sogo-SOGO-${SOGO_VERSION} && \
+    rm -rf SOGo-${SOGO_VERSION}.tar.gz sogo-SOGo-${SOGO_VERSION} && \
     echo "/usr/local/lib/sogo" > /etc/ld.so.conf.d/sogo.conf  && \
     ldconfig 
 
