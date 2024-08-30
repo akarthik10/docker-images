@@ -19,19 +19,19 @@
       "fileMatch": ["^Dockerfile$"],
       "matchStrings": ["SOGO_VERSION=(?<currentValue>.*)"],
       "datasourceTemplate": "github-releases",
-      "depNameTemplate": "Alinto/sogo"
+      "matchPackagePatterns": ["^Alinto/sogo$"]
     },
     {
       "fileMatch": ["^Dockerfile$"],
       "matchStrings": ["SOPE_VERSION=(?<currentValue>.*)"],
       "datasourceTemplate": "github-releases",
-      "depNameTemplate": "Alinto/sope"
+      "matchPackagePatterns": ["^Alinto/sope$"]
     },
     {
       "fileMatch": ["^Dockerfile$"],
       "matchStrings": ["MEMCACHED_VERSION=(?<currentValue>.*)"],
       "datasourceTemplate": "github-releases",
-      "depNameTemplate": "memcached/memcached"
+      "matchPackagePatterns": ["^memcached/memcached$"]
     }
   ]
 }
