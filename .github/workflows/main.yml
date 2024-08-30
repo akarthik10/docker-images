@@ -82,7 +82,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh api /users/${{ github.repository_owner }}/packages?package_type=container | jq -r '[.[] | select(.repository.full_name == "akarthik10/docker-images").name] | .[] ' | sort > packages.txt
+          gh api "/users/${{ github.repository_owner }}/packages?package_type=container" | jq -r '[.[] | select(.repository.full_name == "${{ github.repository_owner }}/${{ github.repository }}").name] | .[] ' | sort > packages.txt
 
       - name: Generate table
         id: generate-table
