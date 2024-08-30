@@ -24,7 +24,7 @@ RUN tar -xvf SOPE-${SOPE_VERSION}.tar.gz && \
 
 RUN apt install -y libsodium-dev libmemcached-dev libwbxml2-dev libzip-dev libytnef-dev
 
-RUN tar -xvf SOGO-${SOGO_VERSION}.tar.gz && \
+RUN tar -xvf SOGo-${SOGO_VERSION}.tar.gz && \
     cd sogo-SOGo-${SOGO_VERSION} && \
     ./configure --enable-debug --disable-strip && \
     make && \
