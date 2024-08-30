@@ -101,9 +101,12 @@ jobs:
 
       - name: Insert table into README
         run: |
-          awk 'BEGIN {p=1} /<!-- AUTO-GENERATED-CONTENT-START -->/ {print;system("cat table.md");p=0} /<!-- AUTO-GENERATED-CONTENT-END -->/ {p=1} p' README.md > README.tmp && mv README.tmp README.md
-          cat packages.txt
-          cat table.md
+          sed -i '' '/<!-- AUTO-GENERATED-TABLE-START -->/,/<!-- AUTO-GENERATED-TABLE-END -->/ {
+              /<!-- AUTO-GENERATED-TABLE-START -->/! {
+              /<!-- AUTO-GENERATED-TABLE-END -->/!d
+              }
+              /<!-- AUTO-GENERATED-TABLE-END -->/r table.md
+            }' README.md
           cat README.md
     
       - name: Commit and push changes
