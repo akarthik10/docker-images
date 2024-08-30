@@ -71,7 +71,7 @@ jobs:
   update-readme:
     name: Update README
     runs-on: ubuntu-latest
-    needs: [changed-files]
+    needs: [matrix-job]
     if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout
