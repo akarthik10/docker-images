@@ -3,46 +3,48 @@ FROM debian:12-slim AS builder
 RUN apt update && \
     export DEBIAN_FRONTEND=noninteractive && \
     apt upgrade -y && \
-    apt install -y gnupg2 apt-utils ca-certificates apt-transport-https wget nginx gosu
+    apt install -y gnupg2 apt-utils ca-certificates apt-transport-https wget nginx gosu \
+    build-essential gnustep-make gnustep-base-runtime libgnustep-base-dev pkg-config libpq-dev libcurl4-openssl-dev  \
+    libz-dev libssl-dev libxml2-dev libldap2-dev
 
-RUN wget https://packages.sogo.nu/sources/SOPE-5.11.0.tar.gz 
-RUN wget https://packages.sogo.nu/sources/SOGo-5.11.0.tar.gz
+ARG SOGO_VERSION=5.11.0
+ARG SOPE_VERSION=5.11.0
+ARG MEMCACHED_VERSION=1.6.29
 
-RUN apt install -y build-essential gnustep-make gnustep-base-runtime libgnustep-base-dev pkg-config libpq-dev libcurl4-openssl-dev  \
-    libz-dev libssl-dev libxml2-dev libldap2-dev 
+RUN wget https://github.com/Alinto/sope/archive/refs/tags/SOPE-${SOPE_VERSION}.tar.gz
+RUN wget https://github.com/Alinto/sogo/archive/refs/tags/SOGo-${SOGO_VERSION}.tar.gz
 
-RUN tar -xvf /SOPE-5.11.0.tar.gz && \
-    cd /SOPE && \
+RUN tar -xvf SOPE-${SOPE_VERSION}.tar.gz && \
+    cd sope-SOPE-${SOPE_VERSION} && \
     ./configure --with-gnustep --enable-debug --disable-strip && \
     make && \
     make install && \
-    rm -rf /SOPE-5.11.0.tar.gz /SOPE && \
+    rm -rf SOPE-${SOPE_VERSION}.tar.gz sope-SOPE-${SOPE_VERSION} && \
     ldconfig
 
 RUN apt install -y libsodium-dev libmemcached-dev libwbxml2-dev libzip-dev libytnef-dev
 
-RUN tar -xvf /SOGo-5.11.0.tar.gz && \
-    cd /SOGo-5.11.0 && \
+RUN tar -xvf SOGo-${SOGO_VERSION}.tar.gz && \
+    cd sogo-SOGo-${SOGO_VERSION} && \
     ./configure --enable-debug --disable-strip && \
     make && \
     make install && \
     cd ActiveSync && \
     make && \
     make install && \
-    rm -rf /SOGo-5.11.0.tar.gz /SOGo-5.11.0 && \
+    rm -rf SOGo-${SOGO_VERSION}.tar.gz sogo-SOGo-${SOGO_VERSION} && \
     echo "/usr/local/lib/sogo" > /etc/ld.so.conf.d/sogo.conf  && \
     ldconfig 
 
-RUN wget https://github.com/memcached/memcached/archive/refs/tags/1.6.29.tar.gz && \
+RUN wget https://github.com/memcached/memcached/archive/refs/tags/${MEMCACHED_VERSION}.tar.gz && \
     apt install -y build-essential libevent-dev pkg-config automake autotools-dev && \
-    tar -zxf 1.6.29.tar.gz && \
+    tar -zxf ${MEMCACHED_VERSION}.tar.gz && \
     cd memcached-* && \
     ./autogen.sh && \
     ./configure && \
     make && \
     ls -lah memcached && \
     cp memcached /usr/local/bin/
-
 
 RUN ldd /usr/local/sbin/sogod | cut -d" " -f3 | xargs tar --dereference -cvf /tmp/libs.tar
 RUN tar -rvf /tmp/libs.tar /usr/local/lib/sogo /usr/share/GNUstep /usr/local/lib/GNUstep/ /etc/GNUstep/GNUstep.conf /usr/sbin/gosu /usr/local/sbin/sogod /usr/local/bin/memcached
