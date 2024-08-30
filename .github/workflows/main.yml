@@ -105,7 +105,7 @@ jobs:
               /<!-- AUTO-GENERATED-TABLE-START -->/! {
               /<!-- AUTO-GENERATED-TABLE-END -->/!d
               }
-              /<!-- AUTO-GENERATED-TABLE-END -->/r table.md
+              /<!-- AUTO-GENERATED-TABLE-END -->/e cat table.md
             }' README.md
           cat README.md
     
