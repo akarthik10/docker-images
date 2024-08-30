@@ -80,7 +80,7 @@ jobs:
       - name: Get package list
         id: get-packages
         run: |
-          gh api repos/:owner/:repo/packages | jq -r '.[] | .name' > packages.txt
+          gh api /users/${{ github.repository_owner }}/packages?package_type=container | jq -r '[.[] | select(.repository.full_name == "akarthik10/docker-images").name] | .[] ' | sort > packages.txt
 
       - name: Generate table
         id: generate-table
@@ -88,8 +88,8 @@ jobs:
           echo "| Package | Latest Version | Last Updated |" > table.md
           echo "|---------|----------------|--------------|" >> table.md
           while IFS= read -r package; do
-            latest_version=$(gh api repos/:owner/:repo/packages/$package/versions/latest | jq -r '.version')
-            last_updated=$(gh api repos/:owner/:repo/packages/$package/versions/latest | jq -r '.created_at')
+            latest_version=$(gh api "/users/${{ github.repository_owner }}/packages/container/$package/versions" | jq -r 'map(select(.metadata.container.tags | length > 0)) | .[0] | .metadata.container.tags[0]')
+            last_updated=$(gh api "/users/${{ github.repository_owner }}/packages/container/$package/versions" | jq -r 'map(select(.metadata.container.tags | length > 0)) | .[0] .updated_at ')
             echo "| $package | $latest_version | $last_updated |" >> table.md
           done < packages.txt
 
