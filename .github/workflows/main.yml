@@ -83,7 +83,7 @@ jobs:
           GH_TOKEN: "${{ github.token }}"
           GH_DEBUG: true
         run: |
-          gh api "/users/${{ github.repository_owner }}/packages?package_type=container"
+          gh api -H "Accept: application/vnd.github+json" "/users/${{ github.repository_owner }}/packages?package_type=container"
           # gh api "/users/${{ github.repository_owner }}/packages?package_type=container" | jq -r '.[] | select(.repository.full_name == "${{ github.repository }}").name' | sort > packages.txt
 
       - name: Generate table
