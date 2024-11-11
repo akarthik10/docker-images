@@ -5,19 +5,19 @@ A monorepo to hold docker images.
 <!-- AUTO-GENERATED-TABLE-START -->
 | Package | Latest Version | Size | Last Updated |
 |---------|----------------|------|--------------|
-| backup-tools | 0.24303.145237 | linux/amd64      83.20M
-linux/arm64      81.14M
-unknown/unknown  9.36K
-unknown/unknown  9.36K | 2024-10-29T14:52:46Z | 
+| backup-tools | 0.24314.234725 | linux/amd64      83.20M
+linux/arm64      81.15M
+unknown/unknown  9.28K
+unknown/unknown  9.28K | 2024-11-09T23:47:42Z | 
 | dovecot | 0.24249.044918 | linux/amd64      51.36M
 linux/arm64      51.06M
 unknown/unknown  6.20K
 unknown/unknown  6.20K | 2024-09-05T04:49:32Z | 
-| f095a4d8-docker-build-cache | n8n |  | 2024-11-09T23:44:10Z | 
-| n8n | 0.24314.234351 | linux/amd64      394.96M
+| f095a4d8-docker-build-cache | n8n |  | 2024-11-11T05:03:45Z | 
+| n8n | 0.24316.050324 | linux/amd64      394.96M
 linux/arm64      393.42M
 unknown/unknown  9.40K
-unknown/unknown  9.40K | 2024-11-09T23:44:06Z | 
+unknown/unknown  9.40K | 2024-11-11T05:03:41Z | 
 | sftpgo | 0.24173.211154 | linux/amd64      78.38M
 linux/arm64      77.18M
 unknown/unknown  5.35K
