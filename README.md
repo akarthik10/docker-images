@@ -5,15 +5,15 @@ A monorepo to hold docker images.
 <!-- AUTO-GENERATED-TABLE-START -->
 | Package | Latest Version | Size | Last Updated |
 |---------|----------------|------|--------------|
-| backup-tools | 0.24320.193233 | linux/amd64      83.20M
-linux/arm64      81.15M
-unknown/unknown  9.28K
-unknown/unknown  9.28K | 2024-11-15T19:32:44Z | 
+| backup-tools | 0.24341.034252 | linux/amd64      74.88M
+linux/arm64      72.15M
+unknown/unknown  9.34K
+unknown/unknown  9.34K | 2024-12-06T03:43:06Z | 
 | dovecot | 0.24319.040836 | linux/amd64      51.36M
 linux/arm64      51.06M
 unknown/unknown  6.15K
 unknown/unknown  6.15K | 2024-11-14T04:08:51Z | 
-| f095a4d8-docker-build-cache | n8n |  | 2024-12-04T19:46:50Z | 
+| f095a4d8-docker-build-cache | backup-tools |  | 2024-12-06T03:43:07Z | 
 | n8n | 0.24339.194632 | linux/amd64      400.21M
 linux/arm64      398.36M
 unknown/unknown  9.32K
