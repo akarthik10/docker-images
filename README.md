@@ -9,11 +9,11 @@ A monorepo to hold docker images.
 linux/arm64      72.70M
 unknown/unknown  9.34K
 unknown/unknown  9.34K | 2025-01-13T01:22:08Z | 
-| dovecot | 0.24319.040836 | linux/amd64      51.36M
-linux/arm64      51.06M
-unknown/unknown  6.15K
-unknown/unknown  6.15K | 2024-11-14T04:08:51Z | 
-| f095a4d8-docker-build-cache | backup-tools |  | 2025-01-13T01:22:08Z | 
+| dovecot | 0.25014.233114 | linux/amd64      50.48M
+linux/arm64      50.00M
+unknown/unknown  6.17K
+unknown/unknown  6.17K | 2025-01-14T23:31:32Z | 
+| f095a4d8-docker-build-cache | z-push |  | 2025-01-14T23:31:39Z | 
 | n8n | 0.25009.225452 | linux/amd64      416.72M
 linux/arm64      414.26M
 unknown/unknown  9.32K
@@ -30,8 +30,8 @@ unknown/unknown  40.36K | 2024-11-27T03:07:32Z |
 linux/arm64      71.91M
 unknown/unknown  5.82K
 unknown/unknown  5.82K | 2024-08-22T13:27:24Z | 
-| z-push | 0.24319.040837 | linux/amd64      92.44M
-linux/arm64      91.99M
-unknown/unknown  11.55K
-unknown/unknown  11.55K | 2024-11-14T04:08:53Z | 
+| z-push | 0.25014.233113 | linux/amd64      91.64M
+linux/arm64      91.01M
+unknown/unknown  11.61K
+unknown/unknown  11.61K | 2025-01-14T23:31:37Z | 
 <!-- AUTO-GENERATED-TABLE-END -->
