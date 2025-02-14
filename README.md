@@ -13,7 +13,7 @@ unknown/unknown  9.34K | 2025-01-13T01:22:08Z |
 linux/arm64      50.00M
 unknown/unknown  6.17K
 unknown/unknown  6.17K | 2025-01-14T23:31:32Z | 
-| f095a4d8-docker-build-cache | n8n |  | 2025-02-13T22:00:41Z | 
+| f095a4d8-docker-build-cache | sogo |  | 2025-02-14T01:43:58Z | 
 | n8n | 0.25044.220024 | linux/amd64      410.51M
 linux/arm64      407.69M
 unknown/unknown  9.32K
@@ -22,10 +22,10 @@ unknown/unknown  9.32K | 2025-02-13T22:00:37Z |
 linux/arm64      77.58M
 unknown/unknown  5.32K
 unknown/unknown  5.32K | 2025-02-08T01:09:43Z | 
-| sogo | 0.24332.030724 | linux/amd64      125.70M
-linux/arm64      121.73M
-unknown/unknown  40.36K
-unknown/unknown  40.36K | 2024-11-27T03:07:32Z | 
+| sogo | 0.25045.071342 | linux/amd64      124.93M
+linux/arm64      120.78M
+unknown/unknown  40.39K
+unknown/unknown  40.39K | 2025-02-14T07:13:54Z | 
 | vscode-tunnel | 0.24235.132543 | linux/amd64      72.55M
 linux/arm64      71.91M
 unknown/unknown  5.82K
