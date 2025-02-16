@@ -13,11 +13,11 @@ unknown/unknown  10.76K | 2025-02-14T21:55:39Z |
 linux/arm64      50.00M
 unknown/unknown  6.17K
 unknown/unknown  6.17K | 2025-01-14T23:31:32Z | 
-| f095a4d8-docker-build-cache | n8n |  | 2025-02-15T17:56:09Z | 
-| n8n | 0.25046.175545 | linux/amd64      410.74M
-linux/arm64      407.93M
-unknown/unknown  9.32K
-unknown/unknown  9.32K | 2025-02-15T17:56:04Z | 
+| f095a4d8-docker-build-cache | n8n |  | 2025-02-16T02:44:47Z | 
+| n8n | 0.25047.024424 | linux/amd64      400.17M
+linux/arm64      397.71M
+unknown/unknown  9.31K
+unknown/unknown  9.31K | 2025-02-16T02:44:43Z | 
 | sftpgo | 0.25039.010930 | linux/amd64      78.92M
 linux/arm64      77.58M
 unknown/unknown  5.32K
