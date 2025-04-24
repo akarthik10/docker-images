@@ -55,7 +55,7 @@ RUN find / -name libwbxml2.so.1 | xargs tar --dereference -rvf /tmp/libs.tar
 RUN apt install -y rdfind && \
     which rdfind | xargs tar -rvf /tmp/libs.tar
 
-FROM nginx:1.27.5-bookworm AS runner
+FROM nginx:1.28.0-bookworm AS runner
 # COPY --from=builder /tmp/libs.tar /tmp/libs.tar
 RUN --mount=type=bind,from=builder,source=/tmp/libs.tar,target=/tmp/libs.tar ls -lah /tmp/libs.tar  && tar -xvf /tmp/libs.tar && \ 
 # rm /tmp/libs.tar && \
