@@ -2,7 +2,7 @@
 # Builder image
 #
 
-FROM restic/restic:0.17.3 AS restic
+FROM restic/restic:0.18.0 AS restic
 FROM rclone/rclone:1.69.2 AS rclone
 
 #
