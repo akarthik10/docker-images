@@ -3,7 +3,7 @@
 #
 
 FROM restic/restic:0.18.0 AS restic
-FROM rclone/rclone:1.70.2 AS rclone
+FROM rclone/rclone:1.70.3 AS rclone
 
 #
 # Final image
