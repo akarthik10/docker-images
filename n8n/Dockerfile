@@ -7,6 +7,7 @@ RUN <<EOF
     pip3 install --requirement /tmp/requirements.txt --break-system-packages
     npm -dd install youtube-transcript youtubei.js 
     npm install -g pnpm@latest-10
+    pnpm i -g
     cd /usr/local/lib/node_modules/n8n 
     pnpm install n8n-nodes-python imapflow mailparser @actual-app/api
     cd -
