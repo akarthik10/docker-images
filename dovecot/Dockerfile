@@ -1,4 +1,4 @@
-FROM debian:12.12-slim
+FROM debian:13.1-slim
 
 ENV container=docker \
     LC_ALL=C
