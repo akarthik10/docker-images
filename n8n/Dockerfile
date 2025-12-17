@@ -1,4 +1,4 @@
-FROM n8nio/n8n:1.123.6
+FROM n8nio/n8n:1.123.7
 
 USER root
 COPY requirements.txt /tmp/
