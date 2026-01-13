@@ -1,4 +1,4 @@
-FROM debian:12.12-slim
+FROM debian:12.13-slim
 ENV ZPUSH_VERSION=2.7.3
 
 ARG IMAP_SERVER
