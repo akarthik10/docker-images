@@ -8,7 +8,7 @@ USER root
 COPY requirements.txt /tmp/
 RUN <<EOF
     cd /usr/local/lib/node_modules/n8n 
-    npm install -g imapflow mailparser @actual-app/api # n8n-nodes-python
+    npm install -g imapflow mailparser @actual-app/api
     cd -
 EOF
 USER node
