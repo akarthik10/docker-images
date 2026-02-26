@@ -2,4 +2,4 @@
 
 # renovate: n8nio/runners
 RUNNERS_VERSION="2.3.0"
-echo "$RUNNERS_VERSION+`date +'0.%y%j.%H%M%S'`"
+echo "$RUNNERS_VERSION-`date +'0.%y%j.%H%M%S'`"
