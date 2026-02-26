@@ -1,5 +1,0 @@
-#!/bin/bash
-
-# renovate: n8nio/runners
-RUNNERS_VERSION="2.3.0"
-echo $RUNNERS_VERSION
