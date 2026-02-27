@@ -15,5 +15,14 @@
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": true
     }
+  ],
+  "customManagers": [
+    {
+      customType: 'regex',
+      matchStrings: [
+        '#\\s*renovate:\\s*(?<depName>[^\\s]+)\\s*\\n[^=]+=(?<currentValue>[^\\s]+)'
+      ],
+      datasourceTemplate: 'docker',
+    }
   ]
 }
