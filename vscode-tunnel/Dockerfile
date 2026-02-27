@@ -1,4 +1,4 @@
-FROM debian:12-slim
+FROM debian:13-slim
 
 # Read the target arch, set OS to alpine-x64 or alpine-arm64, change vs code download url accordingly
 ARG TARGETARCH
