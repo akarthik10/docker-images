@@ -1,29 +1,39 @@
 {
-  "extends": [
-    "config:base"
+  extends: [
+    'config:recommended',
   ],
-  
-  "packageRules": [
+  packageRules: [
     {
-      "matchUpdateTypes": ["minor", "patch", "pin"],
-      "matchCurrentVersion": "!/^0/",
-      "automerge": true
-    },
-    // Allowed packages to be automerged
-    {
-      "matchPackageNames": ["n8nio/n8n", "yfinance"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "automerge": true
-    }
-  ],
-  "customManagers": [
-    {
-      "customType": "regex",
-      "managerFilePatterns": ["/\\.imagetag$/"],
-      "matchStrings": [
-        "#\\s*renovate:\\s*(?<depName>[^\\s]+)\\s*\\n[^=]+=(?<currentValue>[^\\s]+)"
+      matchUpdateTypes: [
+        'minor',
+        'patch',
+        'pin',
       ],
-      "datasourceTemplate": "docker",
-    }
-  ]
+      matchCurrentVersion: '!/^0/',
+      automerge: true,
+    },
+    {
+      matchPackageNames: [
+        'n8nio/n8n',
+        'yfinance',
+      ],
+      matchUpdateTypes: [
+        'minor',
+        'patch',
+      ],
+      automerge: true,
+    },
+  ],
+  customManagers: [
+    {
+      customType: 'regex',
+      managerFilePatterns: [
+        '/\\.imagetag$/',
+      ],
+      matchStrings: [
+        '#\\s*renovate:\\s*(?<depName>[^\\s]+)\\s*\\n[^=]+=(?<currentValue>[^\\s]+)',
+      ],
+      datasourceTemplate: 'docker',
+    },
+  ],
 }
