@@ -19,6 +19,7 @@
   "customManagers": [
     {
       "customType": "regex",
+      "managerFilePatterns": ["/\\.imagetag$/"],
       "matchStrings": [
         "#\\s*renovate:\\s*(?<depName>[^\\s]+)\\s*\\n[^=]+=(?<currentValue>[^\\s]+)"
       ],
