@@ -1,5 +1,5 @@
 FROM n8nio/runners:2.3.0
 USER root
-RUN cd /opt/runners/task-runner-javascript && pnpm add imapflow mailparser @actual-app/api
+RUN cd /opt/runners/task-runner-javascript && pnpm add imapflow mailparser @actual-app/api --allow-build=imapflow --allow-build=mailparser --allow-build=@actual-app/api
 COPY n8n-task-runners.json /etc/n8n-task-runners.json
 USER runner
