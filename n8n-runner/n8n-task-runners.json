@@ -5,8 +5,6 @@
 			"workdir": "/home/runner",
 			"command": "/usr/local/bin/node",
 			"args": [
-				"--disallow-code-generation-from-strings",
-				"--disable-proto=delete",
 				"/opt/runners/task-runner-javascript/dist/start.js"
 			],
 			"health-check-server-port": "5681",
