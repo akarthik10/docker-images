@@ -35,5 +35,12 @@
       ],
       datasourceTemplate: 'docker',
     },
+    {
+      customType: 'regex',
+      managerFilePatterns: ['/n8n-runner/Dockerfile/'],
+      matchStrings: ['@actual-app/api@(?<currentValue>[^\\s]+)'],
+      depNameTemplate: '@actual-app/api',
+      datasourceTemplate: 'npm',
+      },
   ],
 }
