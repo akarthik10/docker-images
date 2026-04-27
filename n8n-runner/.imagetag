@@ -1,5 +1,5 @@
 #!/bin/bash
 
 # renovate: n8nio/runners
-RUNNERS_VERSION="2.18.3"
+RUNNERS_VERSION="2.18.4"
 echo "$RUNNERS_VERSION-`date +'0.%y%j.%H%M%S'`"
