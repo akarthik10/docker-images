@@ -8,7 +8,7 @@ FROM rclone/rclone:1.74.3 AS rclone
 #
 # Final image
 #
-FROM alpine:3.23
+FROM alpine:3.24
 
 RUN apk add --update --no-cache ca-certificates fuse nfs-utils openssh tzdata bash curl docker-cli postgresql-client mariadb-client
 
