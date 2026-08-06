@@ -11,11 +11,11 @@ RUN apt-get update && \
     apt-get purge -y make g++ && apt-get autoremove -y && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN useradd -m -s /bin/bash -u 1000 agent
-USER agent
-WORKDIR /home/agent
+USER node
+WORKDIR /home/node
 
 RUN curl -fsSL https://claude.ai/install.sh | bash
-ENV PATH="/home/agent/.local/bin:${PATH}"
+ENV PATH="/home/node/.local/bin:${PATH}"
+ENV NODE_PATH="/usr/local/lib/node_modules"
 
 CMD ["claude", "remote-control", "--name", "Home Cluster Agent"]
