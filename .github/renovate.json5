@@ -37,10 +37,28 @@
     },
     {
       customType: 'regex',
-      managerFilePatterns: ['/n8n-runner/Dockerfile/'],
+      managerFilePatterns: ['/n8n-runner/Dockerfile/', '/claude-agent/Dockerfile/'],
       matchStrings: ['@actual-app/api@(?<currentValue>[^\\s]+)'],
       depNameTemplate: '@actual-app/api',
       datasourceTemplate: 'npm',
       },
+    {
+      customType: 'regex',
+      managerFilePatterns: ['/claude-agent/Dockerfile/'],
+      matchStrings: [
+        'imapflow@(?<currentValue>[^\\s]+)',
+      ],
+      depNameTemplate: 'imapflow',
+      datasourceTemplate: 'npm',
+    },
+    {
+      customType: 'regex',
+      managerFilePatterns: ['/claude-agent/Dockerfile/'],
+      matchStrings: [
+        'mailparser@(?<currentValue>[^\\s]+)',
+      ],
+      depNameTemplate: 'mailparser',
+      datasourceTemplate: 'npm',
+    },
   ],
 }
