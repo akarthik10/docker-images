@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>keymaster</title>
+<style>
+body{font:16px/1.4 system-ui,sans-serif;max-width:34rem;margin:0 auto;padding:1rem;background:#fff;color:#111}
+@media(prefers-color-scheme:dark){body{background:#111;color:#eee}.box{background:#222}}
+.box{background:#f3f3f3;padding:.6rem .8rem;border-radius:.4rem;margin:.6rem 0;white-space:pre-wrap;word-break:break-word}
+.warn{background:#fde68a;color:#111;padding:.6rem .8rem;border-radius:.4rem;margin:.6rem 0}
+button{font:inherit;padding:.7rem 1.2rem;margin:.3rem .3rem .3rem 0;border-radius:.4rem;border:1px solid #888}
+label{display:block;margin:.3rem 0}.small{font-size:.85rem;opacity:.75}
+</style></head><body>
+<h1>keymaster</h1>
+{{if .Message}}<p>{{.Message}}</p>{{end}}
+{{if .ID}}
+<h2>Access request</h2>
+<p>Agent: <b>{{.Agent}}</b></p>
+<div class="small">Agent's stated reason (unverified)</div>
+<div class="box">{{.Reason}}</div>
+{{if .Warning}}<div class="warn"><b>Careful:</b> a write scope would coexist with read access to untrusted content (notes, feeds, mail). Prompt injection could chain them.</div>{{end}}
+<form method="post" action="/approve/{{.ID}}">
+<input type="hidden" name="csrf" value="{{.CSRF}}">
+{{range .Scopes}}<label><input type="checkbox" name="scope" value="{{.Name}}" {{if .Checked}}checked{{end}}> {{.Name}}{{if .Write}} <b>(write)</b>{{end}}</label>{{end}}
+<label>Duration <select name="ttl">{{range .TTLs}}<option value="{{.}}">{{.}} min</option>{{end}}</select></label>
+{{if .RememberDays}}<label><input type="checkbox" name="remember" value="1"> Remember for up to {{.RememberDays}} days (skip the passkey for these scopes)</label>{{end}}
+<button name="action" value="approve">Approve</button>
+<button name="action" value="deny">Deny</button>
+</form>
+{{end}}
+{{if .Grants}}<h2>Active grants</h2>{{end}}
+{{if or .Active .Grants}}
+{{range .Active}}<div class="box">{{.Agent}}: {{range .Scopes}}{{.}} {{end}}<br><span class="small">until {{.ExpiresAt.Format "15:04:05"}}</span>
+{{if $.Grants}}<form method="post" action="/grants/revoke"><input type="hidden" name="csrf" value="{{$.CSRF}}"><input type="hidden" name="id" value="{{.ID}}"><button>Revoke</button></form>{{end}}</div>{{else}}{{if .Grants}}<p>None.</p>{{end}}{{end}}
+{{if .Grants}}<form method="post" action="/grants/revoke"><input type="hidden" name="csrf" value="{{.CSRF}}"><input type="hidden" name="id" value="all"><button>Revoke all</button></form>{{end}}
+{{end}}
+</body></html>

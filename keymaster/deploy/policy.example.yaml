@@ -1,0 +1,19 @@
+# Example policy; the real one lives in homelab-flux as a ConfigMap.
+agents:
+  - sa: default/claude-agent
+    allowed_connectors: [copyparty, echo]
+connectors:
+  copyparty:
+    kind: proxy
+    upstream: http://copyparty.default.svc.cluster.local:3923
+    auth: {type: basic, user_file: copyparty-user, pass_file: copyparty-pass}
+    untrusted_content: true
+    scopes:
+      notes-read:  {tier: 1, max_ttl: 72h, rules: [{methods: [GET, HEAD, PROPFIND], paths: ["^/Documents/Notes/ani(/.*)?$"]}]}
+      notes-write: {tier: 2, max_ttl: 1h,  rules: [{methods: [GET, HEAD, PROPFIND, PUT, MKCOL], paths: ["^/Documents/Notes/ani(/.*)?$"]}]}
+  echo:   # built-in test connector, reflects what upstream would see
+    kind: proxy
+    upstream: "internal:echo"
+    scopes:
+      any: {tier: 0, max_ttl: 1h, rules: [{methods: [GET], paths: ["^/.*$"]}]}
+defaults: {proxy_ttl: 15m, pending_expiry: 10m, auth_max_age: 120s}
