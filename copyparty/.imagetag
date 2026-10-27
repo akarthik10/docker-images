@@ -1,5 +1,5 @@
 #!/bin/bash
 
 # renovate: copyparty/iv
-COPYPARTY_VERSION="1.20.16"
+COPYPARTY_VERSION="1.20.26"
 echo "$COPYPARTY_VERSION-`date +'0.%y%j.%H%M%S'`"

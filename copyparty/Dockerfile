@@ -1,4 +1,4 @@
-FROM copyparty/iv:1.20.16
+FROM copyparty/iv:1.20.26
 
 # The upstream iv image ships a patent-stripped custom ffmpeg (HEVC/H.265 removed)
 # and drops vips-heif. We replace it with the standard Alpine ffmpeg and restore
