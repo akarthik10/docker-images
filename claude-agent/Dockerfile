@@ -14,7 +14,9 @@ RUN apt-get update && \
 USER node
 WORKDIR /home/node
 
-RUN curl -fsSL https://claude.ai/install.sh | bash
+# Pinned so the build cache can't serve a stale install; bump to upgrade.
+ARG CLAUDE_VERSION=2.1.312
+RUN curl -fsSL https://claude.ai/install.sh | bash -s "${CLAUDE_VERSION}"
 ENV PATH="/home/node/.local/bin:${PATH}"
 ENV NODE_PATH="/usr/local/lib/node_modules"
 
