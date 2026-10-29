@@ -7,7 +7,7 @@ RUN apt-get update && \
     curl -fsSL -o /usr/local/bin/kubectl \
       "https://dl.k8s.io/release/$(curl -fsSL https://dl.k8s.io/release/stable.txt)/bin/linux/${TARGETARCH}/kubectl" && \
     chmod +x /usr/local/bin/kubectl && \
-    npm install -g imapflow@1.7.8 mailparser@3.9.14 @actual-app/api@26.10.0 --allow-build=better-sqlite3 && \
+    npm install -g imapflow@1.7.8 mailparser@3.12.4 @actual-app/api@26.10.0 --allow-build=better-sqlite3 && \
     apt-get purge -y make g++ && apt-get autoremove -y && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
